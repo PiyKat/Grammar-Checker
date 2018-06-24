@@ -47,7 +47,7 @@ The primary contributions of this project are:
 - `data_reader.py`: an abstract class that defines the interface for classes which are capable of reading a source dataset and producing input-output pairs, where the input is a grammatically incorrect variant of a source sentence and the output is the original sentence.
 - `text_corrector_data_readers.py`: contains a few implementations of `DataReader` over the [Cornell Movie-Dialogs Corpus](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html).
 - `text_corrector_models.py`: contains a version of `Seq2SeqModel` modified such that it implements the logic described in [Biased Decoding](#biased-decoding)
-- `correct_text.py`: a collection of helper functions that together allow for the training of a model and the usage of it to decode errant input sequences (at test time). The `decode` method defined here implements the [OOV token resolution logic](#handling-oov-tokens). This also defines a main method, and can be invoked from the command line. It was largely derived from TensorFlow's [`translate.py`](https://www.tensorflow.org/tutorials/seq2seq/).
+- `correct_text.py`: a collection of helper functions that together allow for the training of a model and the usage of it to decode errant input sequences (at test time).
 - `TextCorrector.ipynb`: an IPython notebook which ties together all of the above pieces to proprocess text and train the model.
 
 ### Example Usage
