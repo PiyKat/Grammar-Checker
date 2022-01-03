@@ -1,11 +1,8 @@
 # Grammar-Checker
 
-The purpose of the code is to correct simple grammatical mistakes using deep learning techniques, more specifically an delay sequence to sequence model with attention mechanism.
+The purpose of the code is to correct simple grammatical mistakes using deep learning techniques, more specifically a delayed sequence to sequence model with attention mechanism.
 
-## Datasets
-
-Since there is no open source dataset for the purpose of grammar correction, I decided to use a simple technique for adding grammatical pertubations to a dataset that contains respectable no of sentences with consistent grammar.
-This was the largest collection of conversational written English I could find that was mostly grammatically correct, consisting of over 300k lines.
+## Dataset
 
 Given a sample of text like this, the next step is to generate input-output pairs to be used during training. 
 This is done by:
@@ -13,12 +10,13 @@ This is done by:
 2. Setting the input sequence to this sentence after randomly applying certain perturbations.
 3. Setting the output sequence to the unperturbed sentence.
 
-where the perturbations applied in step (2) are intended to introduce small grammatical errors which we would like the model to learn to correct. 
+where the perturbations applied in step (2) are intended to introduce small grammatical errors which we would like the model to learn to correct.
+
 Thus far, these perturbations are limited to the:
 - subtraction of articles (a, an, the)
 - replacement of a few common homophones with one of their counterparts (e.g. replacing "their" with "there", "then" with "than")
 
-In this project, each perturbation is applied in 25% of cases where it could potentially be applied.
+In this project, each perturbation is applied in 25% of cases where it could potentially be applied. Please feel free to include more gramatical perturbations. 
 
 ### Training
 Given this augmented dataset, training proceeds in a very similar manner to [TensorFlow's sequence-to-sequence tutorial](https://www.tensorflow.org/tutorials/seq2seq/). 
@@ -26,7 +24,7 @@ That is, we train a sequence-to-sequence model using LSTM encoders and decoders 
 
 ### Decoding
 
-Although we can use a standard decoder for our task, there is a better approach for solving this task. Given that our grammataical errors only span a fixed subdomainm we can configure our decoder to handle text in such a way that it all tokens
+Although we can use a standard decoder for our task, there is a better approach for solving this task. Given that our grammatical errors only span a fixed subdomainm we can configure our decoder to handle text in such a way that it all tokens
 of the sequence should exist in the input sample or a set of corrective tokens. The corrective set is provided in the provided during the training.
 
 This prior is carried out through a modification to the seq2seq model's decoding loop in addition to a post-processing step that resolves out-of-vocabulary (OOV) tokens by a process known as biased decoding:
